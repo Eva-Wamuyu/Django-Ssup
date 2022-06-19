@@ -7,9 +7,13 @@ from .forms import LoginForm, RegistrationForm,BusinessForm,AddPost,UpdateProfil
 from django.contrib.auth import login,authenticate,logout,decorators,hashers
 # Create your views here.
 def index(request):
+  if request.user.is_authenticated:
+    return redirect('home')
   return render(request,'hood/index.html')
 
 def logger(request):
+  if request.user.is_authenticated:
+    return redirect('home')
   form = LoginForm()
   if request.method == 'POST':
     form = LoginForm(request.POST)
@@ -51,7 +55,7 @@ def search(request):
     context = {'heading':f'No search results for term {searchterm}'}
     return render(request,'hood/results.html', context=context)
     
-    
+@decorators.login_required(login_url="/login")    
 def home(request):
   form = BusinessForm()
   buttonMsg = "Add Business"
@@ -70,10 +74,11 @@ def home(request):
       return HttpResponseRedirect(reverse('home'))
   context = {'form': form, 'buttonMsg': buttonMsg, 'form_title': form_title,'title': title,'posts':posts,'contacts':contacts}
   return render(request,'hood/home.html',context=context)
-
+@decorators.login_required(login_url="/login")
 def news(request):
   return render(request,'hood/home.html')
 
+@decorators.login_required(login_url="/login")
 def post(request):
   form = AddPost()
   buttonMsg = "Send Message"
@@ -89,6 +94,7 @@ def post(request):
   return render(request,'hood/home.html',context=context)
   
 
+@decorators.login_required(login_url="/login")
 def settings(request):
   form = UpdateProfile()
   form_heading = "Update Your Information"
@@ -106,11 +112,12 @@ def settings(request):
   context = {'form':form, 'form_heading':form_heading}
   return render(request,'hood/results.html',context=context)
 
+@decorators.login_required(login_url="/login")
 def loggout(request):
   logout(request)
   return redirect('index')
 
-
+@decorators.login_required(login_url="/login")
 def profile(request):
   posts = Business.objects.all().filter(user=request.user).order_by('id')
   postss = Post.objects.all().filter(user=request.user).order_by('date_posted')
@@ -118,6 +125,7 @@ def profile(request):
   context = {'posts': posts,'postss': postss}
   return render(request,'hood/prof.html',context=context)
 
+@decorators.login_required(login_url="/login")
 def delete(request,item,id):
   if item=="biz":
    biz = Business.objects.get(pk=id)

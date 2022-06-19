@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 from pathlib import Path
-from decouple import config
+from decouple import config,Csv
 import django_heroku
 import dj_database_url
 
@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'Ssup.urls'
@@ -79,7 +80,7 @@ WSGI_APPLICATION = 'Ssup.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 if config('MODE') == 'development':
     DEBUG = True
@@ -147,8 +148,10 @@ CLOUDINARY_STORAGE = {
     'API_SECRET':config('api_secret'),
 
 }
+
 AUTH_USER_MODEL = 'hood.HoodUser'
 LOGOUT_REDIRECT_URL = "/"
 LOGIN_REDIRECT_URL = 'index'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 django_heroku.settings(locals())
