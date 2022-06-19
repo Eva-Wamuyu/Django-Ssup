@@ -28,7 +28,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 
 
-ALLOWED_HOSTS = ['*',]
+
 
 
 # Application definition
@@ -79,8 +79,8 @@ WSGI_APPLICATION = 'Ssup.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+ALLOWED_HOSTS = ['127.0.0.1']
 
-DEBUG = True
 if config('MODE') == 'development':
     DEBUG = True
     DATABASES = {
