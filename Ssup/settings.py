@@ -92,7 +92,7 @@ if config('MODE') == 'development':
         }
     }
 else:
-    DEBUG = False
+    DEBUG = True
     DATABASES = {
         'default': dj_database_url.config(default=config('DATABASE_URL')
             
