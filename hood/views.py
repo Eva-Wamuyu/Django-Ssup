@@ -92,6 +92,17 @@ def post(request):
 def settings(request):
   form = UpdateProfile()
   form_heading = "Update Your Information"
+  if request.method == 'POST':
+    form = UpdateProfile(request.POST)
+    if form.is_valid():
+      user = request.user
+      user.msg = form.cleaned_data['msg']
+      user.hood = form.cleaned_data['hood']
+      user.avatar = form.cleaned_data['avatar']
+      user.save()
+      return redirect('profile')
+    context = {'form':form, 'form_heading':form_heading}
+    return render(request,'hood/results.html',context=context)
   context = {'form':form, 'form_heading':form_heading}
   return render(request,'hood/results.html',context=context)
 
