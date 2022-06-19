@@ -84,7 +84,7 @@ def post(request):
   buttonMsg = "Send Message"
   form_title = "Add a message. It will be visible to people in your locality"
   title = "What Your Neighbours are saying"
-  posts = Post.objects.all().filter(h=request.user.hood)
+  posts = Post.objects.all().filter(h=request.user.hood).filter(is_sos=False)
   if request.method == 'POST':
     form = AddPost(request.POST)
     if form.is_valid():
