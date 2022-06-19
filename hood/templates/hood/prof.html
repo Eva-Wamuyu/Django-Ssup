@@ -19,11 +19,8 @@
   <div class="w3-row">
     {% for post in postss %}
     <div class="w3-col s12 m6 l6">
-      {{post.name}}
-
-
+      {{post.post}}
       <p> {{post.name}} <a href="{% url 'delete' item="post" id=post.id %}">   <i class="fa fa-trash" aria-hidden="true"></i>  </a></p>
-    
     </div>
     {% endfor %}
   </div>

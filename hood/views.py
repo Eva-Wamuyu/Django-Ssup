@@ -88,8 +88,9 @@ def post(request):
   if request.method == 'POST':
     form = AddPost(request.POST)
     if form.is_valid():
-      new_post = Post(post=form.cleaned_data['post'], date_posted=date.today(), user=request.user)
+      new_post = Post(post=form.cleaned_data['post'], date_posted=date.today(), user=request.user,h=request.user.hood)
       new_post.save()
+      return HttpResponseRedirect(reverse('post'))
   context = {'form': form, 'buttonMsg': buttonMsg, 'form_title': form_title,'title': title,'posts':posts}
   return render(request,'hood/home.html',context=context)
   
