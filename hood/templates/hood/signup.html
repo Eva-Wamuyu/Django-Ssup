@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block nav %}
+
+{% endblock nav %}
+
+{% block content %}
+
+<div class="centered">
+
+<form method="post" action="{% url 'signer'%}"class="data">
+  {% csrf_token %}
+  <a href="/"> 
+    <h3> <i class="fas fa-home"></i> </h3> </a>
+  <h2 class="font"> Become A Member</h2>
+  <p>
+    Have an account? <a href="{%  url 'logger' %}"> Login </a>
+  </p>
+  <br>
+  {{form}}
+
+  <button class="button">I am A member</button>
+</form>
+
+</div>
+{% endblock content %}
