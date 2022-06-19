@@ -5,7 +5,7 @@
 ## Description
 A web app, where users get to access information about the area they live in.
 
-## PJ Stories
+### PJ Stories
 * Sign in with the application to start using.
 * Set up a profile about me and a general location and my neighborhood name.
 * Find a list of different businesses in my neighborhood.
