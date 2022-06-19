@@ -31,6 +31,7 @@
     <p>By:{{post.user.first_name}}</p>
     <p> {{post.post}}</p>
     <p>{{post.email}}</p>
+    <p>{{post.date_posted|date:"M d, Y"}}</p>
    {% if post.biz_type %}
    <p>Type: {{post.biz_type}}</p>
    {% endif %}
