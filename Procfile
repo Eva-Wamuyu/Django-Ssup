@@ -1,0 +1,1 @@
+web: gunicorn Ssup.wsgi --log-file - 
