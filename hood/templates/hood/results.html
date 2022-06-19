@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="w3-container">
+<section class="w3-row">
+  {% if heading %}
+  <h4 class="w3-center"> {{heading}}</h4>
+  {% endif %}
+  {% for post in posts %}
+  <div class="w3-col">
+
+   
+  </div>
+  {% endfor %}
+
+</section>
+
+{% if form %}
+<section class="center">
+  <form enctype="multipart/form-data" method="post" action="" class="data">
+    <h4 class="font"> {{form_heading}} </h4>
+    {% csrf_token %}
+    <h4 class="font w3-center"> {{form_title}}</h4>
+    {% for input in form %}
+    {{input.label}}
+    <br>
+    {{input}}
+    <br>
+    {% endfor %}
+    <button class="button">Change Details</button>
+  </form>
+</div>
+</section>
+{% endif %}
+
+{% endblock content %}
