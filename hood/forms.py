@@ -43,7 +43,7 @@ class BusinessForm(forms.ModelForm):
       'name': 'Business Name',
       'hood': 'Business Locality',
       'biz_type':'What Does it Deal with',
-      'avatar': 'A business Photo can be handy'
+      'avatar': 'A business Photo can be handy Not mandatory'
     }
 
 

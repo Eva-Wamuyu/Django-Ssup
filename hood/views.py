@@ -37,7 +37,7 @@ def signer(request):
   if request.method == 'POST':
     form = RegistrationForm(request.POST)
     if form.is_valid():
-      neighbour = HoodUser(first_name=form.cleaned_data['first_name'],last_name=form.cleaned_data['last_name'],username=form.cleaned_data['email'],password=hashers.make_password(form.cleaned_data['password']),hood=form.cleaned_data['hood'])
+      neighbour = HoodUser(first_name=form.cleaned_data['first_name'],last_name=form.cleaned_data['last_name'],username=form.cleaned_data['email'],password=hashers.make_password(form.cleaned_data['password']),hood=form.cleaned_data['hood'],email=form.cleaned_data['email'])
       neighbour.save()
       login(request,neighbour)
       return redirect('home')
@@ -97,7 +97,7 @@ def post(request):
 
 @decorators.login_required(login_url="/login")
 def settings(request):
-  form = UpdateProfile()
+  form = UpdateProfile(initial={'hood':request.user.hood, 'msg':request.user.msg})
   form_heading = "Update Your Information"
   if request.method == 'POST':
     form = UpdateProfile(request.POST)
