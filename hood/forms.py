@@ -37,7 +37,7 @@ class LoginForm(forms.ModelForm):
 class BusinessForm(forms.ModelForm):
   class Meta:
     model = Business
-    exclude = ['user',]
+    exclude = ['user','avatar']
 
     labels = {
       'name': 'Business Name',

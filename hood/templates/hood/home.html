@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 
 {% block content %}
 
@@ -23,18 +23,37 @@
   <h3 class="font w3-center">{{title}}</h3>
   {% for post in posts %}
   <div class="w3-col s6 m3 l3">
-    {% if post.avatar.url %}
-    <img class="w3-image" src={{post.avatar.url}} alt="post img">
-    {% endif %}
+    
+     
+    {% if post.biz_type %}
+        {% if post.biz_type == 'DR' %}
+            <img class="w3-image icon" src={% static 'drinks.png'%} alt="some drinks">
+            <small> Drinks</small>
+            {% elif post.biz_type == 'FS'  %}
+            <img class="w3-image icon" src={% static 'foods.jpg'%} alt="some food">
+            <small> Foods</small>
+            {% elif post.biz_type == 'CR'  %}
+            <img class="w3-image icon" src={% static 'cyber.png'%} alt="some food">
+            <small> Cyber/game/movies</small>
+            {% elif post.biz_type == 'CG'  %}
+            <img class="w3-image icon" src={% static 'clothes.png'%} alt="some food">
+            <small> Boutique</small>
+            {% elif post.biz_type == 'GR'  %}
+            <img class="w3-image icon" src={% static 'general.jpg'%} alt="some food">
+            <small> Others</small>
+         {% endif %}
+      {% endif %}
+
+   
+   
+    
    <article class="place-top">
     <p>{{post.name}}</p>
     <p>By:{{post.user.first_name}}</p>
     <p> {{post.post}}</p>
     <p>{{post.email}}</p>
     <p>{{post.date_posted|date:"M d, Y"}}</p>
-   {% if post.biz_type %}
-   <p>Type: {{post.biz_type}}</p>
-   {% endif %}
+  
    </article>
   </div>
   {% endfor %}

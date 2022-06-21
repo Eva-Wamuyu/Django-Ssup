@@ -68,7 +68,7 @@ def home(request):
   if request.method == 'POST':
     form = BusinessForm(request.POST,request.FILES)
     if form.is_valid():
-      biz = Business(user=request.user,hood=form.cleaned_data['hood'],name=form.cleaned_data['name'],email=form.cleaned_data['email'],biz_type=form.cleaned_data['biz_type'],avatar=form.cleaned_data['avatar'])
+      biz = Business(user=request.user,hood=form.cleaned_data['hood'],name=form.cleaned_data['name'],email=form.cleaned_data['email'],biz_type=form.cleaned_data['biz_type'])
       print(biz)
       biz.save()
       return HttpResponseRedirect(reverse('home'))
