@@ -1,4 +1,4 @@
-from random import choices
+
 from django import forms
 from .models import HoodUser,Business, Post
 
@@ -18,18 +18,11 @@ class RegistrationForm(forms.ModelForm):
       'password': 'A Strong Password'
     }
 
-class LoginForm(forms.ModelForm):
-  password = forms.CharField(max_length=255, widget=forms.PasswordInput())
+class LoginForm(forms.Form):
   email = forms.CharField(max_length=255, widget=forms.EmailInput())
-  class Meta:
-    model = HoodUser
-    fields = ['email', 'password']
-
-    labels = {
-      'email': 'Your Email',
-      'password': 'Password',
-    
-    }
+  password = forms.CharField(max_length=255, widget=forms.PasswordInput())
+  
+  
 
 
 

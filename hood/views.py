@@ -17,6 +17,8 @@ def logger(request):
   form = LoginForm()
   if request.method == 'POST':
     form = LoginForm(request.POST)
+    print("post mentho")
+    print(form.errors)
     if form.is_valid():
       email = form.cleaned_data['email']
       password = form.cleaned_data['password']
